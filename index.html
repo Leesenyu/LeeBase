@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全屋定制 · 家装资讯 | MORANDI EDIT</title>
+<style>
+  :root{
+    --bg:#f3efe7;
+    --bg-deep:#ece6da;
+    --card:#faf7f1;
+    --ink:#3b3630;
+    --ink-soft:#6d655b;
+    --ink-faint:#9a9185;
+    --line:#ddd5c6;
+    --gold:#a98e5f;
+    --gold-deep:#8d7449;
+    --sage:#8a9c8c;
+    --sage-soft:#e4e9e0;
+    --blue:#8b9ba6;
+    --blue-soft:#e0e6e9;
+    --rose:#b98f8b;
+    --rose-soft:#eee2df;
+    --clay:#bd9a7e;
+    --clay-soft:#eee4d8;
+    --violet:#a49aad;
+    --violet-soft:#e8e5ea;
+    --serif:"Songti SC","Noto Serif SC","STSong","SimSun",serif;
+    --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold);color:#fff;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    text-align:center;
+    padding:88px 24px 64px;
+    background:
+      radial-gradient(1200px 500px at 50% -10%, rgba(185,143,139,.18), transparent 60%),
+      radial-gradient(900px 420px at 85% 0%, rgba(138,156,140,.16), transparent 55%),
+      radial-gradient(900px 420px at 10% 10%, rgba(169,142,95,.12), transparent 55%),
+      var(--bg);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;left:50%;top:0;transform:translateX(-50%);
+    width:1px;height:100%;
+    background:linear-gradient(to bottom, transparent, var(--gold), transparent);
+    opacity:.35;
+  }
+  .hero-kicker{
+    font-size:12px;letter-spacing:.55em;text-indent:.55em;
+    color:var(--gold-deep);text-transform:uppercase;margin-bottom:26px;
+  }
+  .hero-title{
+    font-family:var(--serif);font-weight:600;
+    font-size:clamp(32px,5.2vw,58px);letter-spacing:.18em;text-indent:.18em;
+    line-height:1.25;
+  }
+  .hero-title em{font-style:normal;color:var(--gold-deep);}
+  .hero-sub{
+    margin:22px auto 0;max-width:620px;
+    font-size:14px;color:var(--ink-soft);letter-spacing:.08em;line-height:2;
+  }
+  .hero-date{
+    margin-top:30px;display:inline-flex;align-items:center;gap:14px;
+    font-size:12px;letter-spacing:.3em;color:var(--ink-faint);
+  }
+  .hero-date::before,.hero-date::after{content:"";width:34px;height:1px;background:var(--gold);opacity:.6;}
+
+  /* ===== STATS ===== */
+  .stats{
+    max-width:1080px;margin:-34px auto 0;padding:0 24px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .stat{
+    background:var(--card);padding:26px 12px;text-align:center;
+  }
+  .stat b{display:block;font-family:var(--serif);font-weight:600;font-size:30px;color:var(--gold-deep);letter-spacing:.05em;}
+  .stat span{font-size:12px;color:var(--ink-soft);letter-spacing:.18em;}
+
+  /* ===== SECTION ===== */
+  .section{max-width:1080px;margin:0 auto;padding:72px 24px 8px;}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:34px;}
+  .sec-no{
+    font-family:var(--serif);color:var(--gold);font-size:15px;letter-spacing:.2em;
+  }
+  .sec-title{
+    font-family:var(--serif);font-size:22px;letter-spacing:.28em;color:var(--ink);
+  }
+  .sec-line{flex:1;height:1px;background:linear-gradient(to right,var(--line),transparent);}
+
+  /* ===== FILTER CHIPS ===== */
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;}
+  .chip{
+    padding:7px 18px;border:1px solid var(--line);border-radius:999px;
+    font-size:12px;letter-spacing:.2em;color:var(--ink-soft);cursor:pointer;
+    transition:all .25s;background:transparent;font-family:var(--sans);
+  }
+  .chip:hover{border-color:var(--gold);color:var(--gold-deep);}
+  .chip.active{background:var(--ink);border-color:var(--ink);color:#f5f1e8;}
+  .chip i{font-style:normal;margin-right:6px;font-size:10px;}
+
+  /* ===== NEWS CARDS ===== */
+  .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:2px;
+    padding:34px 34px 30px;position:relative;overflow:hidden;
+    transition:transform .3s ease, box-shadow .3s ease;
+    display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(80,70,55,.10);}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;}
+  .card.c-policy::before{background:var(--sage);}
+  .card.c-industry::before{background:var(--blue);}
+  .card.c-trend::before{background:var(--rose);}
+  .card.c-consumer::before{background:var(--clay);}
+
+  .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .tag{
+    font-size:11px;letter-spacing:.28em;padding:4px 14px;border-radius:999px;
+  }
+  .t-policy{color:#5c705f;background:var(--sage-soft);}
+  .t-industry{color:#5a6d78;background:var(--blue-soft);}
+  .t-trend{color:#8c5d58;background:var(--rose-soft);}
+  .t-consumer{color:#8a6848;background:var(--clay-soft);}
+  .card-date{font-size:12px;color:var(--ink-faint);letter-spacing:.1em;}
+
+  .card-title{
+    font-family:var(--serif);font-weight:600;font-size:20px;line-height:1.55;
+    letter-spacing:.04em;margin-bottom:6px;
+  }
+  .card-en{
+    font-size:10px;color:var(--ink-faint);letter-spacing:.3em;text-transform:uppercase;margin-bottom:18px;
+  }
+  .card-bg{
+    font-size:13px;color:var(--ink-soft);line-height:1.9;margin-bottom:14px;
+  }
+  .card-bg b{color:var(--ink);font-weight:600;}
+  .card-body{
+    font-size:13.5px;color:var(--ink);line-height:1.95;margin-bottom:20px;
+  }
+  .card-body b{color:var(--gold-deep);font-weight:600;}
+
+  .card-channels{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+  .ch{
+    font-size:11px;padding:3px 11px;border:1px solid var(--line);border-radius:999px;
+    color:var(--ink-soft);letter-spacing:.06em;background:#fff;
+  }
+  .ch b{color:var(--gold-deep);font-weight:600;margin-right:3px;}
+
+  .card-links{margin-top:auto;padding-top:16px;border-top:1px dashed var(--line);}
+  .card-links a{
+    display:inline-block;font-size:12px;color:var(--gold-deep);
+    text-decoration:none;letter-spacing:.04em;margin-right:18px;margin-top:6px;
+    border-bottom:1px solid transparent;transition:border-color .2s;
+  }
+  .card-links a:hover{border-color:var(--gold-deep);}
+
+  /* ===== CHANNEL COVERAGE ===== */
+  .channels{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);margin-bottom:24px;
+  }
+  .channel{background:var(--card);padding:28px 14px;text-align:center;}
+  .channel .logo{
+    width:44px;height:44px;margin:0 auto 14px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:600;font-size:17px;color:#fff;
+  }
+  .channel:nth-child(1) .logo{background:linear-gradient(135deg,#b8c0d0,#8a99ad);}
+  .channel:nth-child(2) .logo{background:linear-gradient(135deg,#8fb0c9,#5c87a8);}
+  .channel:nth-child(3) .logo{background:linear-gradient(135deg,#5b84b1,#2e5f8f);}
+  .channel:nth-child(4) .logo{background:linear-gradient(135deg,#e2a49a,#cf7f70);}
+  .channel:nth-child(5) .logo{background:linear-gradient(135deg,#7dbd7f,#4a9c52);}
+  .channel .name{font-family:var(--serif);font-size:15px;letter-spacing:.14em;margin-bottom:6px;}
+  .channel .desc{font-size:11px;color:var(--ink-faint);line-height:1.8;}
+
+  /* ===== FOOTNOTE ===== */
+  .note{
+    max-width:1080px;margin:0 auto;padding:0 24px 70px;
+  }
+  .note-box{
+    background:var(--bg-deep);border:1px solid var(--line);padding:26px 30px;
+    font-size:12px;color:var(--ink-soft);line-height:2;letter-spacing:.02em;
+  }
+  .note-box b{color:var(--ink);}
+
+  footer{
+    text-align:center;padding:36px 24px 46px;border-top:1px solid var(--line);
+    font-size:11px;color:var(--ink-faint);letter-spacing:.3em;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:900px){
+    .news-grid{grid-template-columns:1fr;}
+    .stats{grid-template-columns:repeat(2,1fr);margin-top:-24px;}
+    .channels{grid-template-columns:repeat(2,1fr);}
+    .section{padding-top:56px;}
+  }
+  @media (max-width:520px){
+    .hero{padding:64px 18px 48px;}
+    .card{padding:26px 22px;}
+    .stats{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-kicker">Whole-House Customization · Home Decoration</div>
+  <h1 class="hero-title">全屋定制 · 家装<em>资讯</em></h1>
+  <p class="hero-sub">汇聚全网公开渠道最新动态 —— 政策法规 · 行业观察 · 设计趋势 · 消费洞察<br>信息均经多源交叉核验，按时间 / 背景 / 内容 / 来源渠道整理</p>
+  <div class="hero-date">2026 · 8 · 27</div>
+</header>
+
+<!-- ============ STATS ============ -->
+<div class="stats">
+  <div class="stat"><b>08</b><span>精选条目</span></div>
+  <div class="stat"><b>05</b><span>覆盖渠道</span></div>
+  <div class="stat"><b>04</b><span>主题板块</span></div>
+  <div class="stat"><b>100%</b><span>多源核验</span></div>
+</div>
+
+<!-- ============ FILTER ============ -->
+<section class="section">
+  <div class="sec-head"><span class="sec-no">01</span><h2 class="sec-title">本期精选</h2><span class="sec-line"></span></div>
+  <div class="chips" id="chips">
+    <button class="chip active" data-f="all"><i>◆</i>全部</button>
+    <button class="chip" data-f="policy"><i>◆</i>政策法规</button>
+    <button class="chip" data-f="industry"><i>◆</i>行业观察</button>
+    <button class="chip" data-f="trend"><i>◆</i>设计趋势</button>
+    <button class="chip" data-f="consumer"><i>◆</i>消费洞察</button>
+  </div>
+
+  <!-- ============ NEWS GRID ============ -->
+  <div class="news-grid" id="grid">
+
+    <!-- 1 新国标 -->
+    <article class="card c-policy" data-c="policy">
+      <div class="card-top">
+        <span class="tag t-policy">政策法规</span>
+        <span class="card-date">2026-06-01</span>
+      </div>
+      <h3 class="card-title">人造板新国标实施，E0 级成为全屋定制强制底线</h3>
+      <div class="card-en">GB 18580-2025 · 环保准入门槛升级</div>
+      <p class="card-bg"><b>时间：</b>2026年6月1日起强制实施。旧国标对"人造板"与"人造板制品"一刀切，仅满足 E1 级即可上市，难以回应消费者对室内环保的更高诉求。</p>
+      <p class="card-body">新版强制性国标《室内装饰装修材料 人造板及其制品中甲醛释放限量》首次区分两类对象：<b>人造板基材 E1 级（≤0.124 mg/m³）为最低门槛</b>，直接进入室内的<b>人造板制品须达 E0 级（≤0.050 mg/m³）</b>方可合法销售，E1 级制品退出室内成品市场；<b>ENF 级（≤0.025 mg/m³）</b>则成为高端品牌主流配置。全屋定制柜、护墙板等成品家具全部纳入监管，重塑行业环保底线。</p>
+      <div class="card-channels">
+        <span class="ch"><b>人民日报</b>官方解读</span>
+        <span class="ch"><b>百度</b>百家号科普</span>
+        <span class="ch"><b>知乎</b>选材热议</span>
+        <span class="ch"><b>微信</b>公众号解读</span>
+      </div>
+      <div class="card-links">
+        <a href="http://paper.people.com.cn/rmrb/pc/content/202607/28/content_30171311.html" target="_blank" rel="noopener">人民日报：人造板制品怎么选 →</a>
+        <a href="https://www.sina.cn/news/article/comos_niprcpz6254903.html" target="_blank" rel="noopener">新浪：ENF 级成标配？→</a>
+        <a href="https://post.m.smzdm.com/p/az8knl9r/" target="_blank" rel="noopener">什么值得买：E0 成底线 →</a>
+      </div>
+    </article>
+
+    <!-- 2 甲醛整治 -->
+    <article class="card c-policy" data-c="policy">
+      <div class="card-top">
+        <span class="tag t-policy">政策法规</span>
+        <span class="card-date">2026-06-24</span>
+      </div>
+      <h3 class="card-title">市监总局、住建部联合整治甲醛治理与检测乱象</h3>
+      <div class="card-en">严打检测报告造假</div>
+      <p class="card-bg"><b>时间：</b>2026年6月24日方案公布、6月起启动。家装"除甲醛"市场长期存在治理乱收费、检测报告造假等乱象，直接损害消费者对环保装修的信任。</p>
+      <p class="card-body">市场监管总局、住房城乡建设部联合印发《室内空气甲醛治理和检测乱象整治工作方案》，分<b>部署排查（6月）—集中整治—巩固提升</b>三阶段推进，重点<b>严打检测报告造假</b>、规范治理机构行为，并要求各地通过媒体、微信公众号、短视频等渠道加强舆论监督、曝光违法案件。</p>
+      <div class="card-channels">
+        <span class="ch"><b>澎湃新闻</b>报道</span>
+        <span class="ch"><b>政府网</b>全文发布</span>
+        <span class="ch"><b>腾讯</b>新闻转载</span>
+      </div>
+      <div class="card-links">
+        <a href="https://m.thepaper.cn/newsDetail_forward_33449770" target="_blank" rel="noopener">澎湃：联合整治甲醛乱象 →</a>
+        <a href="https://www.hunan.gov.cn/zqt/zcsd/202606/t20260625_34011387.html" target="_blank" rel="noopener">湖南省政府网：方案全文 →</a>
+      </div>
+    </article>
+
+    <!-- 3 城市更新 -->
+    <article class="card c-policy" data-c="policy">
+      <div class="card-top">
+        <span class="tag t-policy">政策法规</span>
+        <span class="card-date">2026-05-22</span>
+      </div>
+      <h3 class="card-title">《城市更新"十五五"规划》印发，存量装修迎政策红利</h3>
+      <div class="card-en">首部国家级城市更新专项规划</div>
+      <p class="card-bg"><b>时间：</b>2026年5月22日国务院印发（国发〔2026〕12号）。新房交付持续萎缩，存量房成为家装主战场，政策开始向"既有住房装修"倾斜。</p>
+      <p class="card-body">规划明确提出<b>"鼓励居民开展既有住房装修和局部升级改造，推广装配式装修和适老化、无障碍改造"</b>，是城市更新领域第一部国家级专项规划。地方密集跟进：<b>珠海公积金装修提取 8 月起实施</b>（住房初始登记满8年、按 <b>1500 元/㎡</b>核定、累计不超账户余额90%），南宁、汉中同按 1500 元/㎡；山东、南宁等地亦出台鼓励既有住房整装文件。机构测算中国家装市场规模已超 3.2 万亿元，存量装修市场约 1.5 万亿获"强心剂"。</p>
+      <div class="card-channels">
+        <span class="ch"><b>中国政府网</b>全文</span>
+        <span class="ch"><b>腾讯新闻</b>地方落地</span>
+        <span class="ch"><b>央广网</b>政策解读</span>
+        <span class="ch"><b>微信</b>公众号解读</span>
+      </div>
+      <div class="card-links">
+        <a href="https://www.gov.cn/zhengce/content/202605/content_7070539.htm" target="_blank" rel="noopener">中国政府网：规划全文 →</a>
+        <a href="https://view.inews.qq.com/a/20260805A0BPC600" target="_blank" rel="noopener">腾讯：旧房焕新政策密集落地 →</a>
+        <a href="http://house.cnr.cn/kcb/20260604/t20260604_527647328.shtml" target="_blank" rel="noopener">央广网：珠海公积金装修提取 →</a>
+      </div>
+    </article>
+
+    <!-- 4 半年报 -->
+    <article class="card c-industry" data-c="industry">
+      <div class="card-top">
+        <span class="tag t-industry">行业观察</span>
+        <span class="card-date">2026-08-27</span>
+      </div>
+      <h3 class="card-title">定制家居半年报：超六成企业预亏，行业加速出清</h3>
+      <div class="card-en">头部承压 · 腰部由盈转亏</div>
+      <p class="card-bg"><b>时间：</b>2026年7–8月业绩预告与半年报陆续落地。新房交付持续萎缩、消费信心不足、前期国补政策透支等多重因素叠加，行业并未如期"触底反弹"。</p>
+      <p class="card-body">50 家家居企业中超六成预亏。<b>欧派</b>预计归母净利 4.07–5.09 亿元（同比降 50%–60%），仍是板块少数维持亿元级盈利的企业；<b>索菲亚</b>归母净利 4790.70万–7026.36 万元，同比下降 78%–85%；<b>志邦家居</b>上市以来首现中报亏损（营收 14.65 亿元、同比降 22.88%，归母净利 −1.57 亿元）；金牌家居、好莱客亦由盈转亏。存量房整装、局改等新模式尚未形成可复制盈利模型。</p>
+      <div class="card-channels">
+        <span class="ch"><b>新浪财经</b>报道</span>
+        <span class="ch"><b>金融界</b>深度</span>
+        <span class="ch"><b>同花顺</b>财报数据</span>
+        <span class="ch"><b>腾讯</b>新闻转载</span>
+      </div>
+      <div class="card-links">
+        <a href="https://finance.sina.com.cn/stock/relnews/cn/2026-08-18/doc-inintxxh8575575.shtml" target="_blank" rel="noopener">新浪财经：50家家居企业半年报 →</a>
+        <a href="https://school.10jqka.com.cn/20260827/c679363308.shtml" target="_blank" rel="noopener">同花顺：志邦半年报解读 →</a>
+        <a href="https://finance.jrj.com.cn/2026/07/30170257954832.shtml" target="_blank" rel="noopener">金融界：超六成企业预亏 →</a>
+      </div>
+    </article>
+
+    <!-- 5 市场规模 -->
+    <article class="card c-industry" data-c="industry">
+      <div class="card-top">
+        <span class="tag t-industry">行业观察</span>
+        <span class="card-date">2026-08</span>
+      </div>
+      <h3 class="card-title">市场规模破 5800 亿，存量改造成核心增长引擎</h3>
+      <div class="card-en">从规模扩张到价值深耕</div>
+      <p class="card-bg"><b>时间：</b>2026年（8月综合报道）。行业正式告别高速增长的粗放时代，进入高质量发展的深度转型期。</p>
+      <p class="card-body">据中国建筑装饰协会数据，<b>2026年行业市场规模预计突破 5800 亿元</b>，增速放缓至 5%–8%；据艾瑞咨询数据，<b>存量房翻新需求占比达 62.3%</b>（较2023年不足40%大幅提升），旧改订单一季度同比增长 35%，头部定制企业成为核心承接方。行业竞争逻辑从"价格战、规模扩张"转向<b>品质、设计、服务、环保</b>的综合较量，Z世代与新中产贡献约 70% 新增订单。</p>
+      <div class="card-channels">
+        <span class="ch"><b>东方财富</b>财富号</span>
+        <span class="ch"><b>搜狐</b>行业观察</span>
+        <span class="ch"><b>微信</b>公众号《家居新范式》</span>
+        <span class="ch"><b>知乎</b>从业者讨论</span>
+      </div>
+      <div class="card-links">
+        <a href="https://caifuhao.eastmoney.com/news/20260822110557022153420" target="_blank" rel="noopener">东方财富：5800亿市场的冰与火 →</a>
+        <a href="http://m.toutiao.com/group/7678546248261829171/" target="_blank" rel="noopener">范式访谈：存量房改造 62.3% →</a>
+        <a href="https://m.sohu.com/a/1035499097_122888453/" target="_blank" rel="noopener">搜狐：行业深度分析 →</a>
+      </div>
+    </article>
+
+    <!-- 6 整家场景化 -->
+    <article class="card c-trend" data-c="trend">
+      <div class="card-top">
+        <span class="tag t-trend">设计趋势</span>
+        <span class="card-date">2026-07</span>
+      </div>
+      <h3 class="card-title">整家 / 场景化转型加速：门墙柜一体化 + AI 深度赋能</h3>
+      <div class="card-en">从"卖柜子"到"卖生活场景"</div>
+      <p class="card-bg"><b>时间：</b>2026年持续演进，7月广州建博会集中呈现。行业从单品柜具定制转向整体生活场景打造。</p>
+      <p class="card-body">设计从"模板化"走向"场景化"：<b>门墙柜一体化、LDK+X 灵活布局、适老化与宠物友好</b>设计成为主流；高端木作向<b>无胶安装、可溯源实木</b>升级。品牌端全面加码智能化——<b>欧派</b>升级 3.0 AI 智能设计系统，并在 7 月广州建博会首发"S·缦合东方"全案新品；<b>尚品宅配</b>迭代自研"AI + 尚品宅配"多智能体平台，打通户型解析到生产制造全链路。</p>
+      <div class="card-channels">
+        <span class="ch"><b>什么值得买</b>趋势发布</span>
+        <span class="ch"><b>百度</b>百家号</span>
+        <span class="ch"><b>微信</b>公众号《家居新范式》</span>
+        <span class="ch"><b>抖音</b>品牌内容</span>
+      </div>
+      <div class="card-links">
+        <a href="https://post.m.smzdm.com/p/awm4vkw2/" target="_blank" rel="noopener">什么值得买：设计三大趋势 →</a>
+        <a href="https://m.sohu.com/a/1061518705_122907134/" target="_blank" rel="noopener">搜狐：高定整木分化 →</a>
+        <a href="http://m.toutiao.com/group/7678530832629285428/" target="_blank" rel="noopener">头条：尚品宅配 AI 平台调研 →</a>
+      </div>
+    </article>
+
+    <!-- 7 适我主义 -->
+    <article class="card c-trend" data-c="trend">
+      <div class="card-top">
+        <span class="tag t-trend">设计趋势</span>
+        <span class="card-date">2026-04—08</span>
+      </div>
+      <h3 class="card-title">2026 居住趋势"适我主义"登顶，家装审美转向松弛感</h3>
+      <div class="card-en">拒绝千篇一律的极简</div>
+      <p class="card-bg"><b>时间：</b>2026年4月趋势发布，暑期持续发酵。年轻一代重新定义"家"的意义——家不是样板间，而是为"我"服务的空间。</p>
+      <p class="card-body">小红书《2026年度居住趋势》中，<b>"适我主义"以超 20.4 亿浏览量、626 万次讨论登顶年度关键词</b>。潮流从"冷冰冰的极简"转向"向内探索"：留一个"疗愈角"、允许旧物和手办上桌、接受带结疤的木头与会氧化的黄铜。微博"天猫家装城"等账号持续讨论"拒绝把家装成美术馆""奶油风退位"等话题，个性化、情绪化居住成为主流。</p>
+      <div class="card-channels">
+        <span class="ch"><b>微博</b>原帖热议</span>
+        <span class="ch"><b>搜狐</b>居住趋势解读</span>
+        <span class="ch"><b>知乎</b>审美讨论</span>
+      </div>
+      <div class="card-links">
+        <a href="https://m.weibo.cn/detail/5328495044732717" target="_blank" rel="noopener">微博原帖：向内探索 · 适我主义 →</a>
+        <a href="https://m.sohu.com/a/1065357295_122758521/" target="_blank" rel="noopener">搜狐：适我主义 20.4 亿浏览 →</a>
+      </div>
+    </article>
+
+    <!-- 8 避坑消费 -->
+    <article class="card c-consumer" data-c="consumer">
+      <div class="card-top">
+        <span class="tag t-consumer">消费洞察</span>
+        <span class="card-date">2026</span>
+      </div>
+      <h3 class="card-title">全屋定制投诉高企，"避坑"成全民必修课</h3>
+      <div class="card-en">增项 · 计价 · 环保 · 合同</div>
+      <p class="card-bg"><b>时间：</b>2026年持续高热。2025年全国家装类投诉达 2.18 万件，家居类投诉高居榜首；北京地区全屋定制订单量同比 +21%，投诉量却同步 +17%。</p>
+      <p class="card-body">投诉核心集中在<b>设计落地脱节、隐形增项、环保不达标</b>三大维度。避坑重点：计价只看"投影面积"防隐形增项、认准 E0/ENF 环保等级与检测报告、合同写明板材品牌·封边工艺·五金型号。新修订《消费者权益保护法实施条例》2026年3月1日实施，首次将<b>"低价获客、恶意增项"明确纳入欺诈范畴</b>，为消费者维权提供更强依据。</p>
+      <div class="card-channels">
+        <span class="ch"><b>百度</b>百家号</span>
+        <span class="ch"><b>知乎</b>避坑长文</span>
+        <span class="ch"><b>什么值得买</b>案例</span>
+        <span class="ch"><b>微信</b>公众号</span>
+      </div>
+      <div class="card-links">
+        <a href="http://m.toutiao.com/group/7677871061823717917/" target="_blank" rel="noopener">头条：15万变26万翻车案例 →</a>
+        <a href="https://m.sohu.com/a/1056522495_122911398/" target="_blank" rel="noopener">搜狐：新规严打恶意增项 →</a>
+        <a href="https://post.m.smzdm.com/p/a7g57ngd/" target="_blank" rel="noopener">什么值得买：增项陷阱合同细节 →</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ CHANNEL COVERAGE ============ -->
+<section class="section">
+  <div class="sec-head"><span class="sec-no">02</span><h2 class="sec-title">来源渠道覆盖</h2><span class="sec-line"></span></div>
+  <div class="channels">
+    <div class="channel"><div class="logo">百</div><div class="name">百度 / 百家号</div><div class="desc">资讯聚合 · 科普长文<br>行业内容主要分发地</div></div>
+    <div class="channel"><div class="logo">讯</div><div class="name">腾讯新闻</div><div class="desc">政策落地快讯<br>行业深度报道</div></div>
+    <div class="channel"><div class="logo">知</div><div class="name">知乎</div><div class="desc">深度讨论 · 避坑干货<br>从业者与业主视角</div></div>
+    <div class="channel"><div class="logo">微</div><div class="name">微博</div><div class="desc">趋势话题发酵<br>品牌官方发声</div></div>
+    <div class="channel"><div class="logo">信</div><div class="name">微信公众号</div><div class="desc">行业观察深度号<br>如《家居新范式》等</div></div>
+  </div>
+</section>
+
+<!-- ============ FOOTNOTE ============ -->
+<section class="section" style="padding-top:20px;">
+  <div class="sec-head"><span class="sec-no">03</span><h2 class="sec-title">核验说明</h2><span class="sec-line"></span></div>
+  <div class="note-box">
+    <b>信息核验标准：</b>本页资讯均经多源交叉核验 —— 政策类内容以政府官网、权威媒体原文为准（如中国政府网、人民日报、央广网、澎湃新闻）；行业数据尽量采用行业协会或券商口径并标注来源（如中国建筑装饰协会、艾瑞咨询）；趋势与消费类内容标注平台原帖或首发出处。<br>
+    <b>渠道说明：</b>微博话题以品牌官方账号原帖为据；微信公众号内容以《家居新范式》等深度号经 36氪、搜狐等平台授权转载为证；知乎相关内容通过全网聚合检索覆盖，个别原帖因平台限制未能直接收录链接，均已标注渠道。<br>
+    <b>免责声明：</b>本页为公开信息整理预览，不构成投资或消费决策建议。数据如有更新，以官方最新发布为准。
+  </div>
+</section>
+
+<footer>WHOLE-HOUSE CUSTOMIZATION · MORANDI EDIT · 2026</footer>
+
+<script>
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('.card');
+  chips.forEach(c=>{
+    c.addEventListener('click',()=>{
+      chips.forEach(x=>x.classList.remove('active'));
+      c.classList.add('active');
+      const f=c.dataset.f;
+      cards.forEach(card=>{
+        const show = f==='all' || card.dataset.c===f;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>
